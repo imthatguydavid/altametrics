@@ -17,7 +17,7 @@ import { Label } from "@/components/ui/label";
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { login, error, isAuthenticated } = useAuth();  // Destructure the hook return
+  const { login, isAuthenticated } = useAuth();  // Destructure the hook return
 
   const handleLogin = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -32,54 +32,28 @@ const LoginPage: React.FC = () => {
     <div>
       <h1>Login</h1>
       <Card className="w-[350px]">
-        <CardHeader>
-          <CardTitle>Login</CardTitle>
-          <CardDescription>Deploy your new project in one-click.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleLogin}>
+        <form onSubmit={handleLogin}>
+          <CardHeader>
+            <CardTitle>Login</CardTitle>
+            <CardDescription>Deploy your new project in one-click.</CardDescription>
+          </CardHeader>
+          <CardContent>
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="name">Email:</Label>
                 <Input id="email" onChange={(e) => setEmail(e.target.value)}/>
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="name">Email:</Label>
+                <Label htmlFor="name">Password:</Label>
                 <Input type="password" id="password"  value={password} onChange={(e) => setPassword(e.target.value)} required/>
               </div>
-              <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="framework">Framework</Label>
-              </div>
             </div>
-          </form>
-        </CardContent>
-        <CardFooter className="flex justify-between">
-          <Button variant="outline">Cancel</Button>
-          <Button>Deploy</Button>
-        </CardFooter>
+          </CardContent>
+          <CardFooter className="flex justify-between">
+            <Button type="submit">Login</Button>
+          </CardFooter>
+        </form>
       </Card>
-      <form onSubmit={handleLogin}>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <Button type="submit">Login</Button>
-      </form>
     </div>
   );
 };
