@@ -7,6 +7,15 @@ export class AuthController {
 
   @Post('login')
   async login(@Body() loginDto: { email: string; password: string }) {
-    return this.authService.login(loginDto.email, loginDto.password);
+    console.log('login request data:', loginDto);
+
+    try {
+      const result = await this.authService.login(loginDto.email, loginDto.password);
+      console.log('Login successful, result:', result); // Log successful result
+      return result;
+    } catch (error) {
+      console.error('Error during login:', error); // Log the error
+      throw error; // Ensure the error is still thrown or handled appropriately
+    }
   }
 }
