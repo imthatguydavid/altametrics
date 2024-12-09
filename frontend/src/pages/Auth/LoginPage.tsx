@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
-import useAuth from '../../hooks/useAuth.ts';
+import useAuth from '@/hooks/useAuth.ts';
 import { Navigate } from 'react-router-dom';
+import { Button } from '@/components/ui/button.tsx';
+import { Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card.tsx';
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+
+
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -19,6 +31,33 @@ const LoginPage: React.FC = () => {
   return (
     <div>
       <h1>Login</h1>
+      <Card className="w-[350px]">
+        <CardHeader>
+          <CardTitle>Login</CardTitle>
+          <CardDescription>Deploy your new project in one-click.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleLogin}>
+            <div className="grid w-full items-center gap-4">
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="name">Email:</Label>
+                <Input id="email" onChange={(e) => setEmail(e.target.value)}/>
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="name">Email:</Label>
+                <Input type="password" id="password"  value={password} onChange={(e) => setPassword(e.target.value)} required/>
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="framework">Framework</Label>
+              </div>
+            </div>
+          </form>
+        </CardContent>
+        <CardFooter className="flex justify-between">
+          <Button variant="outline">Cancel</Button>
+          <Button>Deploy</Button>
+        </CardFooter>
+      </Card>
       <form onSubmit={handleLogin}>
         <div>
           <label>Email:</label>
@@ -39,7 +78,7 @@ const LoginPage: React.FC = () => {
           />
         </div>
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">Login</button>
+        <Button type="submit">Login</Button>
       </form>
     </div>
   );
