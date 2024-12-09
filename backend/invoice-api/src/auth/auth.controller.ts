@@ -1,4 +1,11 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  BadRequestException,
+  HttpException,
+  HttpStatus
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 
 @Controller('auth')
@@ -7,15 +14,24 @@ export class AuthController {
 
   @Post('login')
   async login(@Body() loginDto: { email: string; password: string }) {
-    console.log('login request data:', loginDto);
-
     try {
+      if (!loginDto.email || !loginDto.password) {
+        throw new BadRequestException('Email and password must be provided');
+      }
+
       const result = await this.authService.login(loginDto.email, loginDto.password);
-      console.log('Login successful, result:', result); // Log successful result
+
+      console.log('Login successful, result:', result);
       return result;
+
     } catch (error) {
-      console.error('Error during login:', error); // Log the error
-      throw error; // Ensure the error is still thrown or handled appropriately
+      console.error('Error during login:', error);
+
+      if (error instanceof HttpException) {
+        throw error;
+      }
+
+      throw new HttpException('Internal server error', HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 }
