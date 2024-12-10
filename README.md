@@ -22,16 +22,7 @@ POSTGRES_DB=altametrics
 
 ### 2. Building Docker Images for the Backend
 
-#### Step 1: Clone the Repository
-
-Begin by cloning the repository and navigating into the project's directory:
-
-```bash
-git clone https://github.com/imthatguydavid/altametrics.git
-cd altametrics
-```
-
-#### Step 2: Build Docker Images
+#### Build Docker Images
 
 Build the Docker images using Docker Compose, which will take care of building all services defined in your `docker-compose.yml`, such as the backend:
 
@@ -92,18 +83,9 @@ Your frontend should now be running and accessible in your browser at `http://lo
 - **Backend API**: Typically available at `http://localhost:3000`.
 - **Frontend Application**: Launch your browser and go to `http://localhost:5173`.
 
-### Troubleshooting
+```aiignore
+F/E LOGIN INFO
 
-- **Docker Issues**: Verify that Docker Desktop is running and no network-related issues are present that might hinder container communication.
-
-- **Logs**:
-    - View Docker logs via `docker-compose logs`.
-    - Check terminal output for Node.js-related issues when running the frontend locally.
-
-### Additional Notes
-
-- **Environment Variables**: Ensure that you correctly set up `.env` files for both frontend and backend sections, specifying any sensitive information like API URLs or database credentials.
-
-- Always verify that URLs, paths, and ports reflect actual settings used in your project configuration files.
-
-For further support, please check our [repository's issue tracker](https://github.com/imthatguydavid/altametrics/issues) or contact our support team.
+email: user@user.com
+pw: 1234
+```
