@@ -5,31 +5,27 @@ import LoginPage from './pages/Auth/LoginPage.tsx';
 import ProtectedRoute from "./components/Routes/ProtectedRoute.tsx";
 import InvoicesDashboard from "./pages/Invoices/InvoicesDashboard.tsx";
 import { ThemeProvider } from "@/components/theme-provider"
-import { Provider } from 'react-redux';
-import store from './store/store.ts';
 
 const App: React.FC = () => {
   return (
-    <Provider store={store}>
-      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-        <AuthProvider>
-          <Router>
-            <Routes>
-              <Route path="/login" element={<LoginPage />} />
-              <Route
-                path="/invoices"
-                element={
-                  <ProtectedRoute>
-                    <InvoicesDashboard/>
-                  </ProtectedRoute>
-                }
-              />
-              <Route path="/" element={<Navigate to="/invoices" />} />
-            </Routes>
-          </Router>
-        </AuthProvider>
-      </ThemeProvider>
-    </Provider>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <AuthProvider>
+        <Router>
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route
+              path="/invoices"
+              element={
+                <ProtectedRoute>
+                  <InvoicesDashboard/>
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/" element={<Navigate to="/invoices" />} />
+          </Routes>
+        </Router>
+      </AuthProvider>
+    </ThemeProvider>
   );
 };
 

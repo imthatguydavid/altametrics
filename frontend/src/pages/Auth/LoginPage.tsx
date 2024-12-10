@@ -29,8 +29,7 @@ const LoginPage: React.FC = () => {
   }
 
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="flex justify-center items-center h-screen">
       <Card className="w-[350px]">
         <form onSubmit={handleLogin}>
           <CardHeader>

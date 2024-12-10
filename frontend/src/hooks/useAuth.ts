@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface UseAuthReturnType {
   login: (email: string, password: string) => Promise<void>;
@@ -13,6 +14,7 @@ const useAuth = (): UseAuthReturnType => {
     !!localStorage.getItem('jwtToken')
   );
   const [error, setError] = useState<string>('');
+  const navigate = useNavigate();
 
   const login = useCallback(async (email: string, password: string) => {
     try {
@@ -42,6 +44,7 @@ const useAuth = (): UseAuthReturnType => {
   const logout = useCallback(() => {
     localStorage.removeItem('jwtToken');
     setIsAuthenticated(false);
+    navigate('/login');
   }, []);
 
   return { login, logout, isAuthenticated, error, setError };

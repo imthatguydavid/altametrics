@@ -16,8 +16,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { Button } from "@/components/ui/button.tsx";
+import useAuth from '@/hooks/useAuth';
+
 const InvoiceDashboard: React.FC = () => {
   const { data: invoices, isLoading, isError, error } = useInvoices();
+  const { logout } = useAuth();
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -27,11 +31,9 @@ const InvoiceDashboard: React.FC = () => {
     return <div>Error: {(error as Error).message}</div>;
   }
 
-
-
   return (
-    <div className="flex justify-center">
-      <div className="w-full max-w-[80%]">
+    <div className="flex justify-center flex-col items-center">
+      <div className="w-full max-w-[80%] mx-auto mb-8">
         <Dialog>
           <Table className="w-full">
             <TableHeader>
@@ -59,7 +61,7 @@ const InvoiceDashboard: React.FC = () => {
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>
-                      <DialogTitle>{invoice.vendorName}</DialogTitle>
+                      <DialogTitle>{invoice.vendorName} - {invoice.id}</DialogTitle>
                       <DialogDescription>
                         {invoice.description}
                       </DialogDescription>
@@ -91,6 +93,7 @@ const InvoiceDashboard: React.FC = () => {
           </Table>
         </Dialog>
       </div>
+      <Button className="w-1/4 " onClick={()=>logout()}>Log Out</Button>
     </div>
   );
 };
