@@ -5,9 +5,9 @@ const prisma = new PrismaClient();
 async function main() {
   await prisma.user.create({
     data: {
-      email: 'david@altametrics.com',
-      name: 'David Kim',
-      password: '12341234', // Plain text password for simplicity
+      email: 'user@user.com',
+      name: 'Tony Stark',
+      password: '1234', // Plain text password for simplicity
       invoices: {
         create: [
           {
@@ -23,6 +23,20 @@ async function main() {
             due_date: new Date('2024-02-01'),
             description: 'Invoice for products',
             paid: false,
+          },
+          {
+            vendor_name: 'Vendor C',
+            amount: 500.75,
+            due_date: new Date('2024-02-01'),
+            description: 'I am Ironman',
+            paid: false,
+          },
+          {
+            vendor_name: 'Vendor D',
+            amount: 200.75,
+            due_date: new Date('2024-05-01'),
+            description: 'Peace in our time',
+            paid: true,
           },
         ],
       },

@@ -16,6 +16,7 @@ export class InvoicesController {
   constructor(private readonly invoicesService: InvoicesService) {}
 
   @UseGuards(JwtAuthGuard)
+  @Get()
   async getAllInvoices(@Req() req) {
     try {
       if (!req.user || !req.user.userId) {
